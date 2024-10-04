@@ -1,4 +1,14 @@
-# ManipFactor Etterna
+# ManipFactorEtterna-soundsphere
+Read original README below. FOR 4K ONLY.  
+![osu UI! graph](https://raw.githubusercontent.com/Thetan-ILW/ManipFactorEtterna-soundsphere/refs/heads/main/images/osu_ui/graph.webp)
+
+## Plugin installation:
+1. Open the game.  
+2. Open the package manager window (click on the 9 rectangles at the bottom left)  
+3. Go to the `remote` tab and click on the `download` button next to the `manip_factor` plugin.
+4. Restart the game.
+
+# Original README | ManipFactor Etterna
 An Etterna addon that estimates the amount of manip based on replay data, introducing a new metric for play accuracy. Offers both a browser-based version for EtternaOnline and an In-Game version. Hover the cursor to see left and right hands separately.
 
 Follow the instructions below for installation:
