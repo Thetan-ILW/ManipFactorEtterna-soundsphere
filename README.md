@@ -1,5 +1,5 @@
 # ManipFactorEtterna-soundsphere
-Read original README below. FOR 4K ONLY.  
+Read the original README below. FOR 4K ONLY.  
 ![osu UI! graph](https://raw.githubusercontent.com/Thetan-ILW/ManipFactorEtterna-soundsphere/refs/heads/main/images/osu_ui/graph.webp)
 
 ## Plugin installation:
