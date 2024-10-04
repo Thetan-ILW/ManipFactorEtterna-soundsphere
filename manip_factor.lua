@@ -1,9 +1,5 @@
 require("manip_factor.patches")
 
-local dvt = {} -- offset vector
-local ctt = {} -- track vector
-local wuab = {} -- note timing vector
-
 -- key data
 local key0Data
 local key1Data
@@ -81,15 +77,9 @@ local function Percentile(sortedArray, p)
 end
 
 -- Generate key data
-local function GenerateKeyData(offsetVector, timingVector, trackVector, trackNum)
-    local keyData = {}
-    for i = 1, #offsetVector do
-        if trackVector[i] == trackNum then
-            table.insert(keyData, {timingVector[i], offsetVector[i]})
-        end
-    end
-    if #keyData >= 2 then -- Throw out tracks(keys) which have less than 2 notes to avoid nil values
-        return keyData
+local function GenerateKeyData(hits)
+    if #hits >= 2 then -- Throw out tracks(keys) which have less than 2 notes to avoid nil values
+        return hits
     else
         return false
     end
@@ -236,16 +226,12 @@ function GetManipFactorForRow(time)
     return mftotal
 end
 
-return function(replay_data)
-    dvt = replay_data.hitDelta
-    ctt = replay_data.columns
-    wuab = replay_data.noteTime
-
+return function(replayData)
     -- Generate data for all keys
-    key0Data = GenerateKeyData(dvt, wuab, ctt, 0)
-    key1Data = GenerateKeyData(dvt, wuab, ctt, 1)
-    key2Data = GenerateKeyData(dvt, wuab, ctt, 2)
-    key3Data = GenerateKeyData(dvt, wuab, ctt, 3)
+    key0Data = GenerateKeyData(replayData[1])
+    key1Data = GenerateKeyData(replayData[2])
+    key2Data = GenerateKeyData(replayData[3])
+    key3Data = GenerateKeyData(replayData[4])
 
     -- Calculate deviations between keys
     k0to1 = CalculateDeviations(key0Data, key1Data)

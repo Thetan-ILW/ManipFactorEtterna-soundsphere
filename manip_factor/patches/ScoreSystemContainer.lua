@@ -4,23 +4,36 @@ local ShortLogicalNote = require("sphere.models.RhythmModel.LogicEngine.ShortLog
 local base_load = ScoreSystemContainer.load
 function ScoreSystemContainer:load()
         base_load(self)
-        self.hits = { columns = {}, hitDelta = {},  noteTime = {} }
+
+        if self.scoreEngine.noteChart.chartdiff.inputmode ~= "4key" then
+                self.collectHits = false
+                return
+        end
+
+        self.collectHits = true
+        self.hits = {}
+        for i = 1, 4 do
+                table.insert(self.hits, {})
+        end
 end
 
 local base_receive = ScoreSystemContainer.receive
 function ScoreSystemContainer:receive(event)
         base_receive(self, event)
 
+        if not self.collectHits then
+                return
+        end
+
         if event.name ~= "NoteState" then
                return
         end
 
         if (event.noteType == "ShortNote" and event.newState == "passed") or (event.noteType == "LongNote" and event.newState == "startPassedPressed") then
+                local column = tonumber(event.noteIndexType:match("%d+$"))
                 local time = event.currentTime * 1000
                 local hit_delta = event.deltaTime * 1000
-                table.insert(self.hits.columns, tonumber(event.noteIndexType:match("%d+$")) - 1)
-                table.insert(self.hits.hitDelta, hit_delta)
-                table.insert(self.hits.noteTime, time - hit_delta)
+                table.insert(self.hits[column], { time - hit_delta, hit_delta })
         end
 end
 
