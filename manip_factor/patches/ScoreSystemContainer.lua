@@ -6,12 +6,12 @@ function ScoreSystemContainer:load()
         base_load(self)
 
         if self.scoreEngine.noteChart.chartdiff.inputmode ~= "4key" then
-                self.collectHits = false
+                self.hits = nil
                 return
         end
 
-        self.collectHits = true
         self.hits = {}
+
         for i = 1, 4 do
                 table.insert(self.hits, {})
         end
@@ -21,7 +21,7 @@ local base_receive = ScoreSystemContainer.receive
 function ScoreSystemContainer:receive(event)
         base_receive(self, event)
 
-        if not self.collectHits then
+        if not self.hits then
                 return
         end
 
