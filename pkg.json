@@ -1,0 +1,10 @@
+{
+    "name": "manip_factor",
+    "display_name": "Manip factor for 4K",
+    "desc": "Estimates the amount of manip based on replay data.\nCredit: https://github.com/MaidOfFire/ManipFactorEtterna",
+    "creator": "MaidOfFire | Ported by Thetan",
+    "version": 1,
+    "types": {
+        "require": "manip_factor",
+    },
+}
